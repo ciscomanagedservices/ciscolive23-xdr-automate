@@ -1,0 +1,381 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR",
+    "name": "CLUS: Command \u0026 Control Response Workflow",
+    "title": "CLUS: Command \u0026 Control Response Workflow",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "This workflow is triggered automatically in response to a Command \u0026 Control event picked up by Cisco Umbrella that creates an incident in Cisco XDR.",
+      "display_name": "CLUS: Command \u0026 Control Response Workflow",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_025WDFSVZWUXH7dHaO8AYscmGnaFtVsfJ6l",
+        "name": "Group",
+        "title": "Notify Affected Employee",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Send an immediate notification to the affected employee informing them of the detected ransomware activity on their device. Include instructions on immediate next steps (e.g., disconnecting the device from the network, avoiding opening unknown files and links).\n\nTODO:\n- How can we identify the affected employee?",
+          "display_name": "Notify Affected Employee",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_025WDJVYO1LIE2UVNifbZazoQjGdoc8s8fU",
+            "name": "Webex - Send Message to Affected User",
+            "title": "Webex - Send Message to Affected User",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Webex - Send Message to Affected User",
+              "input": {
+                "variable_workflow_01PP77FMYQNAT1f0Boc3Jsu8zZuOJc7OaZs": "amasarda@cisco.com",
+                "variable_workflow_01PP77FMYQOKB6sht7fo6ocrtxThxDnzqIj": "",
+                "variable_workflow_01PP77FMYQPR36iRvL3LB8HijkENSJBlq5v": "## 🚨 IT has detected ransomware activity on one of your devices (Serial Number: PO987ABCD)\n\n\n### ACTION REQUIRED:\n\n1. Please disconnect the device from the network IMMEDIATELY.\n2. Do not open unknown files or links from sources you do not trust.\n3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.",
+                "variable_workflow_01PP77FMYQQX64KQBAlf3SoPQsmb3b6YMD4": "",
+                "variable_workflow_01PP77FMYQS346717GaMvyINtP5frU9HCPI": "$global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW.global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW$"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5",
+                "target_type": "web-service.endpoint"
+              },
+              "workflow_id": "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
+              "workflow_name": "Webex - Send Message to User"
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_025WDFUG42HYU5Gu7kFfRH1K6uQCLbGjp54",
+        "name": "Group",
+        "title": "Engage IT \u0026 Security Teams",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Issue a notification to the IT and security teams about the incident, supplying vital information about the impacted device, such as its IP address, hostname, user, and indicators of compromise (IOC). This helps the teams prioritize their response and swiftly implement required remediation actions.\n\nTODO: Get a ServiceNow PDI",
+          "display_name": "Engage IT \u0026 Security Teams",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_025WE2XC8E9PZ4uJ1S8xTvfT1YXHLXbYvYN",
+            "name": "ServiceNow - Create Incident",
+            "title": "ServiceNow - Create Incident",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "description": "TODO: Get a PDI",
+              "display_name": "ServiceNow - Create Incident",
+              "input": {
+                "variable_workflow_024A3C33QF9117NAAHiw4yjRyjfTSCyHOcY": 2,
+                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "",
+                "variable_workflow_024A3C33QGBRY0vXwhIeQJ0C5cgCICwbAqq": "v2",
+                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "",
+                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "",
+                "variable_workflow_024A3C33QH34L60r4F2r5mOO6j5DJ4qFR05": "",
+                "variable_workflow_024A3C33QH9KK77n9xqdyt4eQoSKpDp5S5B": 2,
+                "variable_workflow_024KB70LZWBXB79qp0VpTX0Hq1DbQx3xNzk": "",
+                "variable_workflow_024KB7EP5C3QH51AttzJafii7FVpxgnB3WM": ""
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "target_type": "web-service.endpoint",
+                "use_workflow_target": true
+              },
+              "workflow_id": "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
+              "workflow_name": "ServiceNow - Create Incident"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_025WE317KPE5U4CLukxPqdWeGKDLGXwbx9b",
+            "name": "ServiceNow - Add Work Note to Incident",
+            "title": "ServiceNow - Add Work Note to Incident",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "ServiceNow - Add Work Note to Incident",
+              "input": {
+                "variable_workflow_024A3C46G4X133RRvukodYecgxT1UvboYjH": "",
+                "variable_workflow_024A3C46G57D94DlqwgX5vQdg4zsgdrE1nX": "v2",
+                "variable_workflow_024A3C46G5EXB59uQiRFRVHrw5U1BS6pHMW": ""
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "target_type": "web-service.endpoint",
+                "use_workflow_target": true
+              },
+              "workflow_id": "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
+              "workflow_name": "ServiceNow - Add Work Note to Incident"
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_025WDGN648TZH3ua28lfhhf9uFALjMrMcX4",
+        "name": "Group",
+        "title": "Enforce Protection Rules",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Leveraging Cisco Umbrella, update the list of blocked domains to ensure any associated domains used by the ransomware are stopped in further connection attempts. This step helps protect not only the affected employee's device but also the entire organization from the identified threat.",
+          "display_name": "Enforce Protection Rules",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_025WEAEUVURLN4TWnC9k1i8TbjhyBCiG8Ro",
+            "name": "Umbrella - Investigate - Categorize Single Domain",
+            "title": "Umbrella - Investigate - Categorize Single Domain",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Umbrella - Investigate - Categorize Single Domain",
+              "input": {
+                "variable_workflow_01PP77ZWZ1OZK55Cu68cPECMLwqTQ7MSMHV": "",
+                "variable_workflow_01PP77ZWZ1RLV4tHfFJvloeNEOVie2H55rk": ""
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "target_type": "web-service.endpoint",
+                "use_workflow_target": true
+              },
+              "workflow_id": "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
+              "workflow_name": "Umbrella - Investigate - Categorize Single Domain"
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_025WDH96BBFHR7er4Np5ZPM76Vvjnkt3CVb",
+        "name": "Group",
+        "title": "Initiate Endpoint Scanning",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Trigger a vulnerability or malware scan on the affected employee's device to identify potential weaknesses and infection points, as well as remnants of the ransomware payload.\n\nTODO: Lookup Secure Endpoint IOC Scanning",
+          "display_name": "Initiate Endpoint Scanning",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_025WDHBOIGIVZ3WSpoTNeAZnqr3M38u0ezz",
+        "name": "Group",
+        "title": "Document the Incident",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Record the details of the ransomware attack, the affected device, and the remediation actions taken. This documentation will be beneficial in refining your organization's security strategy and improving response metrics, like mean time to detection (MTTD) and mean time to response (MTTR).",
+          "display_name": "Document the Incident",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_025WE8Z962A6S6jrYG3a2yegSlnEP15FCvI",
+            "name": "XDR - Incidents - Create Note",
+            "title": "XDR - Incidents - Create Note",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "XDR - Incidents - Create Note",
+              "input": {
+                "variable_workflow_024S5ENDMV7U40d5sa42VGtpZv9CTZMeTIX": "",
+                "variable_workflow_024S5ENDMVXZ31psugTUnbhgMZ3ZmRcH81t": "",
+                "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "",
+                "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "",
+                "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
+                "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": ""
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "target_type": "web-service.endpoint",
+                "use_workflow_target": true
+              },
+              "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
+              "workflow_name": "XDR - Incidents - Create Note"
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_025W2J2HK90LP3gVw454IoXQ0Qd1anzcY85"
+    ]
+  },
+  "categories": {
+    "category_025W2J2HK90LP3gVw454IoXQ0Qd1anzcY85": {
+      "unique_name": "category_025W2J2HK90LP3gVw454IoXQ0Qd1anzcY85",
+      "name": "CLUS",
+      "title": "CLUS",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Workflows \u0026 Atomic Actions for BRKATO-1557: Automating Detection \u0026 Response Outcomes using Cisco XDR\n",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "rules": {
+    "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I": {
+      "name": "Test Automation Rule",
+      "title": "Command \u0026 Control Automation Rule",
+      "description": "This Automation Rule triggers the Command and Control response workflow.",
+      "type": "incident.rule_event",
+      "rule_type": "rule_event",
+      "base_type": "rule",
+      "object_type": "ruleevent",
+      "version": "1.0.0",
+      "properties": {
+        "conditions": {
+          "left_operand": "$output.incident.title$",
+          "operator": "mw",
+          "right_operand": "*[CL Demo]"
+        },
+        "description": "This Automation Rule triggers the Command and Control response workflow.",
+        "disabled": false,
+        "display_name": "Command \u0026 Control Automation Rule",
+        "rule_type": "rule_event",
+        "title": "Command \u0026 Control Automation Rule",
+        "workflows_config": [
+          {
+            "disabled": false,
+            "workflow_id": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR"
+          }
+        ]
+      },
+      "disabled": false,
+      "unique_name": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I"
+    }
+  },
+  "events": {
+    "event_025WAE7QSESUZ5zvAuRKX1buugxOVbCaKwZ": {
+      "name": "Command \u0026 Control Automation Rule",
+      "title": "Command \u0026 Control Automation Rule",
+      "description": "This Automation Rule triggers the Command and Control response workflow.",
+      "type": "incident.event",
+      "base_type": "event",
+      "object_type": "event",
+      "rule_id": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I",
+      "target_id": "",
+      "webhook_id": "",
+      "version": "1.0.0",
+      "properties": {
+        "conditions": {
+          "left_operand": "$output.incident.title$",
+          "operator": "mw",
+          "right_operand": "*[CL Demo]"
+        },
+        "description": "This Automation Rule triggers the Command and Control response workflow.",
+        "disabled": false,
+        "display_name": "Command \u0026 Control Automation Rule",
+        "rule_type": "rule_event",
+        "title": "Command \u0026 Control Automation Rule"
+      },
+      "unique_name": "event_025WAE7QSESUZ5zvAuRKX1buugxOVbCaKwZ"
+    }
+  },
+  "targets": {
+    "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5": {
+      "unique_name": "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5",
+      "name": "Webex Teams",
+      "title": "Webex Teams",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Webex Teams",
+        "disable_certificate_validation": false,
+        "display_name": "Webex Teams",
+        "host": "webexapis.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW": {
+      "unique_name": "variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "CMS Operate Orchestration Webex Bot Token",
+        "type": "datatype.secure_string",
+        "description": "Token for use in Webex message actions",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
+    "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
+    "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
+    "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
+    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks"
+  ],
+  "dependent_workflows": [
+    "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
+    "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
+    "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
+    "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
+    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks"
+  ],
+  "wf_rule_trigger": {
+    "triggerevent_025WE2JHELZCS3j30rGAPIw4kPWXbYS3tem": {
+      "wf_unique_name": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR",
+      "rule_unique_name": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I",
+      "trig_unique_name": "triggerevent_025WE2JHELZCS3j30rGAPIw4kPWXbYS3tem"
+    }
+  }
+}
