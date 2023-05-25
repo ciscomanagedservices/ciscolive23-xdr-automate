@@ -5,7 +5,21 @@
     "title": "CLUS: Command \u0026 Control Response Workflow",
     "type": "generic.workflow",
     "base_type": "workflow",
-    "variables": null,
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Test",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_025X3O832LN4D7JpiMk9n0khlWwiBhh2RhJ",
+        "object_type": "variable_workflow"
+      }
+    ],
     "properties": {
       "atomic": {
         "is_atomic": false
@@ -32,10 +46,34 @@
           "continue_on_failure": false,
           "description": "Send an immediate notification to the affected employee informing them of the detected ransomware activity on their device. Include instructions on immediate next steps (e.g., disconnecting the device from the network, avoiding opening unknown files and links).\n\nTODO:\n- How can we identify the affected employee?",
           "display_name": "Notify Affected Employee",
-          "skip_execution": false
+          "skip_execution": true
         },
         "object_type": "definition_activity",
         "actions": [
+          {
+            "unique_name": "definition_activity_025X016HES8H23ZktsrVPtxlcWTcTsEMb8e",
+            "name": "HTTP Request",
+            "title": "Lookup ServiceNow for Asset's Employee",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "allow_headers_redirect": false,
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "display_name": "Lookup ServiceNow for Asset's Employee",
+              "method": "GET",
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "use_workflow_target": true
+              }
+            },
+            "object_type": "definition_activity"
+          },
           {
             "unique_name": "definition_activity_025WDJVYO1LIE2UVNifbZazoQjGdoc8s8fU",
             "name": "Webex - Send Message to Affected User",
@@ -94,52 +132,26 @@
               "display_name": "ServiceNow - Create Incident",
               "input": {
                 "variable_workflow_024A3C33QF9117NAAHiw4yjRyjfTSCyHOcY": 2,
-                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "",
+                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "Test Incident",
                 "variable_workflow_024A3C33QGBRY0vXwhIeQJ0C5cgCICwbAqq": "v2",
-                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "",
-                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "",
-                "variable_workflow_024A3C33QH34L60r4F2r5mOO6j5DJ4qFR05": "",
+                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "Test Description",
+                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "Test Work Note",
+                "variable_workflow_024A3C33QH34L60r4F2r5mOO6j5DJ4qFR05": "admin",
                 "variable_workflow_024A3C33QH9KK77n9xqdyt4eQoSKpDp5S5B": 2,
-                "variable_workflow_024KB70LZWBXB79qp0VpTX0Hq1DbQx3xNzk": "",
+                "variable_workflow_024KB70LZWBXB79qp0VpTX0Hq1DbQx3xNzk": "IT Security",
                 "variable_workflow_024KB7EP5C3QH51AttzJafii7FVpxgnB3WM": ""
               },
               "runtime_user": {
                 "target_default": true
               },
-              "skip_execution": true,
+              "skip_execution": false,
               "target": {
-                "target_type": "web-service.endpoint",
-                "use_workflow_target": true
+                "override_workflow_target": true,
+                "target_id": "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk",
+                "target_type": "web-service.endpoint"
               },
               "workflow_id": "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
               "workflow_name": "ServiceNow - Create Incident"
-            },
-            "object_type": "definition_activity"
-          },
-          {
-            "unique_name": "definition_activity_025WE317KPE5U4CLukxPqdWeGKDLGXwbx9b",
-            "name": "ServiceNow - Add Work Note to Incident",
-            "title": "ServiceNow - Add Work Note to Incident",
-            "type": "workflow.atomic_workflow",
-            "base_type": "subworkflow",
-            "properties": {
-              "continue_on_failure": false,
-              "display_name": "ServiceNow - Add Work Note to Incident",
-              "input": {
-                "variable_workflow_024A3C46G4X133RRvukodYecgxT1UvboYjH": "",
-                "variable_workflow_024A3C46G57D94DlqwgX5vQdg4zsgdrE1nX": "v2",
-                "variable_workflow_024A3C46G5EXB59uQiRFRVHrw5U1BS6pHMW": ""
-              },
-              "runtime_user": {
-                "target_default": true
-              },
-              "skip_execution": true,
-              "target": {
-                "target_type": "web-service.endpoint",
-                "use_workflow_target": true
-              },
-              "workflow_id": "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
-              "workflow_name": "ServiceNow - Add Work Note to Incident"
             },
             "object_type": "definition_activity"
           }
@@ -155,7 +167,7 @@
           "continue_on_failure": false,
           "description": "Leveraging Cisco Umbrella, update the list of blocked domains to ensure any associated domains used by the ransomware are stopped in further connection attempts. This step helps protect not only the affected employee's device but also the entire organization from the identified threat.",
           "display_name": "Enforce Protection Rules",
-          "skip_execution": false
+          "skip_execution": true
         },
         "object_type": "definition_activity",
         "actions": [
@@ -169,16 +181,17 @@
               "continue_on_failure": false,
               "display_name": "Umbrella - Investigate - Categorize Single Domain",
               "input": {
-                "variable_workflow_01PP77ZWZ1OZK55Cu68cPECMLwqTQ7MSMHV": "",
+                "variable_workflow_01PP77ZWZ1OZK55Cu68cPECMLwqTQ7MSMHV": "monsteradds.at",
                 "variable_workflow_01PP77ZWZ1RLV4tHfFJvloeNEOVie2H55rk": ""
               },
               "runtime_user": {
                 "target_default": true
               },
-              "skip_execution": true,
+              "skip_execution": false,
               "target": {
-                "target_type": "web-service.endpoint",
-                "use_workflow_target": true
+                "override_workflow_target": true,
+                "target_id": "definition_target_01OX88ZJWA63O6H2tIrCteSWiodpYie6wtA",
+                "target_type": "web-service.endpoint"
               },
               "workflow_id": "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
               "workflow_name": "Umbrella - Investigate - Categorize Single Domain"
@@ -188,18 +201,123 @@
         ]
       },
       {
-        "unique_name": "definition_activity_025WDH96BBFHR7er4Np5ZPM76Vvjnkt3CVb",
-        "name": "Group",
-        "title": "Initiate Endpoint Scanning",
-        "type": "logic.group",
+        "unique_name": "definition_activity_025WZJC88QO2V08lCswc1cREjt6L3dGbhX8",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "description": "Trigger a vulnerability or malware scan on the affected employee's device to identify potential weaknesses and infection points, as well as remnants of the ransomware payload.\n\nTODO: Lookup Secure Endpoint IOC Scanning",
-          "display_name": "Initiate Endpoint Scanning",
-          "skip_execution": false
+          "display_name": "Condition Block",
+          "skip_execution": true
         },
-        "object_type": "definition_activity"
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_025WZJC8IDZ353cfeBtmAZlHcPBMwqGFugs",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "",
+                "operator": "eq",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_025WDH96BBFHR7er4Np5ZPM76Vvjnkt3CVb",
+                "name": "Group",
+                "title": "Isolate Host using Secure Endpoint",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "description": "Trigger a vulnerability or malware scan on the affected employee's device to identify potential weaknesses and infection points, as well as remnants of the ransomware payload.\n\n",
+                  "display_name": "Isolate Host using Secure Endpoint",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_025WZIYP7KJ6E0JFXViOPRaynUE9MKoH019",
+                    "name": "Secure Endpoint - Isolate Host",
+                    "title": "Secure Endpoint - Isolate Host",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "display_name": "Secure Endpoint - Isolate Host",
+                      "input": {
+                        "variable_workflow_01PP77UWF61XC6J78V5wbJCUMq6FbLtlWMn": ""
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "target": {
+                        "target_type": "web-service.endpoint",
+                        "use_workflow_target": true
+                      },
+                      "workflow_id": "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
+                      "workflow_name": "Secure Endpoint - Isolate Host"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_025X35SA44RUW5bhjsfmbcx9sGKtM6KjkCs",
+                    "name": "XDR - Contain Incident: Domains",
+                    "title": "XDR - Contain Incident: Domains",
+                    "type": "workflow.sub_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "display_name": "XDR - Contain Incident: Domains",
+                      "input": {
+                        "variable_workflow_024T4T98TMP4X17OoCe6tWsFFuZPA523ncP": "",
+                        "variable_workflow_024T4T98TMX0M2LPFo38lOfV07uXUa2Bbt8": "",
+                        "variable_workflow_024T4T98TNE8S2Lysz99zDfsAvsqm92HS4r": "",
+                        "variable_workflow_024T4T98TNLG34Y0l7No7uRuRdcfNTThFli": "",
+                        "variable_workflow_024T4T98TNU0K2DTwiSUA7HwKtQSOhUAdvq": ""
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "target": {
+                        "execute_on_this_target_group": true,
+                        "target_group_id": "target_group_01HLKTH50I3ZU5IfL3dwQos38eRFcE5gYjM"
+                      },
+                      "workflow_id": "definition_workflow_02496ZJNYJTVH5RB6ApAFfhBXeMsBwFD8LJ",
+                      "workflow_name": "XDR - Contain Incident: Domains"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_025WZJC8U5NR80FqDPpgxyzWgihvUMOe3jW",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "",
+                "operator": "eq",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          }
+        ]
       },
       {
         "unique_name": "definition_activity_025WDHBOIGIVZ3WSpoTNeAZnqr3M38u0ezz",
@@ -211,7 +329,7 @@
           "continue_on_failure": false,
           "description": "Record the details of the ransomware attack, the affected device, and the remediation actions taken. This documentation will be beneficial in refining your organization's security strategy and improving response metrics, like mean time to detection (MTTD) and mean time to response (MTTR).",
           "display_name": "Document the Incident",
-          "skip_execution": false
+          "skip_execution": true
         },
         "object_type": "definition_activity",
         "actions": [
@@ -230,18 +348,47 @@
                 "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "",
                 "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "",
                 "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
-                "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": ""
+                "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": "XDR Automated Response"
               },
               "runtime_user": {
                 "target_default": true
               },
-              "skip_execution": true,
+              "skip_execution": false,
               "target": {
-                "target_type": "web-service.endpoint",
-                "use_workflow_target": true
+                "override_workflow_target": true,
+                "target_id": "$module_target;SecureX;securex:ao:iroh_api$",
+                "target_type": "web-service.endpoint"
               },
               "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
               "workflow_name": "XDR - Incidents - Create Note"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_025X5OVCUGL2V4sGMW6ZsPmAEMdRkcSCD4X",
+            "name": "ServiceNow - Add Work Note to Incident",
+            "title": "ServiceNow - Add Work Note to Incident",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "ServiceNow - Add Work Note to Incident",
+              "input": {
+                "variable_workflow_024A3C46G4X133RRvukodYecgxT1UvboYjH": "",
+                "variable_workflow_024A3C46G57D94DlqwgX5vQdg4zsgdrE1nX": "v2",
+                "variable_workflow_024A3C46G5EXB59uQiRFRVHrw5U1BS6pHMW": ""
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk",
+                "target_type": "web-service.endpoint"
+              },
+              "workflow_id": "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
+              "workflow_name": "ServiceNow - Add Work Note to Incident"
             },
             "object_type": "definition_activity"
           }
@@ -324,6 +471,23 @@
     }
   },
   "targets": {
+    "definition_target_01OX88ZJWA63O6H2tIrCteSWiodpYie6wtA": {
+      "unique_name": "definition_target_01OX88ZJWA63O6H2tIrCteSWiodpYie6wtA",
+      "name": "mdr3_UMB_Investigate",
+      "title": "mdr3_UMB_Investigate",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "mdr3_UMB_Investigate",
+        "host": "investigate.api.umbrella.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
     "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5": {
       "unique_name": "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5",
       "name": "Webex Teams",
@@ -339,6 +503,41 @@
         "no_runtime_user": true,
         "port": 443,
         "protocol": "https"
+      }
+    },
+    "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk": {
+      "unique_name": "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk",
+      "name": "ServiceNow - CLUS PDI",
+      "title": "ServiceNow - CLUS PDI",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_025X56G20FAS16SvgTqyBuyfCfHXN5r3EoT",
+        "description": "",
+        "disable_certificate_validation": false,
+        "display_name": "ServiceNow - CLUS PDI",
+        "host": "dev50986.service-now.com",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "path": "/api",
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_025X56G20FAS16SvgTqyBuyfCfHXN5r3EoT": {
+      "unique_name": "definition_runtime_user_025X56G20FAS16SvgTqyBuyfCfHXN5r3EoT",
+      "name": "ServiceNow - CLUS PDI Admin",
+      "title": "ServiceNow - CLUS PDI Admin",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "Basic",
+        "basic_password": "*****",
+        "basic_username": "admin",
+        "display_name": "ServiceNow - CLUS PDI Admin"
       }
     }
   },
@@ -360,16 +559,25 @@
   "atomic_workflows": [
     "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
-    "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
     "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
-    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks"
+    "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
+    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
+    "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
   ],
   "dependent_workflows": [
     "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
-    "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
     "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
-    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks"
+    "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
+    "definition_workflow_02496ZJNYJTVH5RB6ApAFfhBXeMsBwFD8LJ",
+    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
+    "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
+  ],
+  "module_targets": [
+    {
+      "module_type": "SecureX",
+      "external_id": "securex:ao:iroh_api"
+    }
   ],
   "wf_rule_trigger": {
     "triggerevent_025WE2JHELZCS3j30rGAPIw4kPWXbYS3tem": {
