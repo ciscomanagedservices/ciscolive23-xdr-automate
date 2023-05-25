@@ -203,12 +203,12 @@
       {
         "unique_name": "definition_activity_025WZJC88QO2V08lCswc1cREjt6L3dGbhX8",
         "name": "Condition Block",
-        "title": "Condition Block",
+        "title": "Is Category Malware?",
         "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "display_name": "Condition Block",
+          "display_name": "Is Category Malware?",
           "skip_execution": true
         },
         "object_type": "definition_activity",
@@ -216,7 +216,7 @@
           {
             "unique_name": "definition_activity_025WZJC8IDZ353cfeBtmAZlHcPBMwqGFugs",
             "name": "Condition Branch",
-            "title": "Condition Branch",
+            "title": "Yes",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
@@ -226,7 +226,7 @@
                 "right_operand": ""
               },
               "continue_on_failure": false,
-              "display_name": "Condition Branch",
+              "display_name": "Yes",
               "skip_execution": false
             },
             "object_type": "definition_activity",
@@ -302,7 +302,7 @@
           {
             "unique_name": "definition_activity_025WZJC8U5NR80FqDPpgxyzWgihvUMOe3jW",
             "name": "Condition Branch",
-            "title": "Condition Branch",
+            "title": "No",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
@@ -312,7 +312,7 @@
                 "right_operand": ""
               },
               "continue_on_failure": false,
-              "display_name": "Condition Branch",
+              "display_name": "No",
               "skip_execution": false
             },
             "object_type": "definition_activity"
