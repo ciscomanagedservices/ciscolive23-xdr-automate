@@ -11,12 +11,75 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "Test",
+          "name": "incident_description",
           "type": "datatype.string",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_025X3O832LN4D7JpiMk9n0khlWwiBhh2RhJ",
+        "unique_name": "variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "incident_id",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
+        "properties": {
+          "scope": "local",
+          "name": "xdr_observables",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0262R2MIWLY5J7LlvCgPEf2gSOwRZ6e7FaD",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
+        "properties": {
+          "scope": "local",
+          "name": "xdr_target_observables",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "incident_short_description",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "local",
+          "name": "umbrella_investigate_api_token",
+          "type": "datatype.secure_string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0262S5IABXL622v1jsxfHyZ6XLGBNt8v8Eu",
         "object_type": "variable_workflow"
       }
     ],
@@ -37,6 +100,134 @@
     "object_type": "definition_workflow",
     "actions": [
       {
+        "unique_name": "definition_activity_0263JLEA60YLR1GaqFZ9u112AytTQDL8x20",
+        "name": "Group",
+        "title": "Parse Incident Context from Trigger",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Parse Incident Context from Trigger",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_0263JL3MACA612YAuSqS3XLS1hQar2IfBlK",
+            "name": "Set Variables",
+            "title": "Set Incident ID, Description \u0026 Short Description",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Incident ID, Description \u0026 Short Description",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$",
+                  "variable_value_new": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.incident.id$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa$",
+                  "variable_value_new": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.incident.description$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
+                  "variable_value_new": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.incident.short_description$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_0262R3KI5FTY21muznjPMUgbBKIZBAlxIh1",
+            "name": "For Each",
+            "title": "For Each Observable",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each Observable",
+              "skip_execution": false,
+              "source_array": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.observables.data$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_0262VHYYM0TKJ1kJDLB3C4rUqD8c9RwRq0O",
+                "name": "Add Row to Table",
+                "title": "Add Observable To Table",
+                "type": "core.addrowtotable",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Add Observable To Table",
+                  "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2MIWLY5J7LlvCgPEf2gSOwRZ6e7FaD$",
+                  "row": [
+                    {
+                      "key": "value",
+                      "type": "string",
+                      "value": "$activity.definition_activity_0262R3KI5FTY21muznjPMUgbBKIZBAlxIh1.input.source_array[@].value$"
+                    },
+                    {
+                      "key": "type",
+                      "type": "string",
+                      "value": "$activity.definition_activity_0262R3KI5FTY21muznjPMUgbBKIZBAlxIh1.input.source_array[@].type$"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_0262VJ6CNB9J46af3N67SwCm5ezzeJCmTE8",
+            "name": "For Each",
+            "title": "For Each Target Observable",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each Target Observable",
+              "skip_execution": false,
+              "source_array": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.targets.data$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_0262VJ6CNDYSJ22s6cry2BOjjITcg29iJah",
+                "name": "Add Row to Table",
+                "title": "Add Target Observable To Table",
+                "type": "core.addrowtotable",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Add Target Observable To Table",
+                  "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi$",
+                  "row": [
+                    {
+                      "key": "value",
+                      "type": "string",
+                      "value": "$activity.definition_activity_0262VJ6CNB9J46af3N67SwCm5ezzeJCmTE8.input.source_array[@].value$"
+                    },
+                    {
+                      "key": "type",
+                      "type": "string",
+                      "value": "$activity.definition_activity_0262VJ6CNB9J46af3N67SwCm5ezzeJCmTE8.input.source_array[@].type$"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "unique_name": "definition_activity_025WDFSVZWUXH7dHaO8AYscmGnaFtVsfJ6l",
         "name": "Group",
         "title": "Notify Affected Employee",
@@ -44,33 +235,53 @@
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "description": "Send an immediate notification to the affected employee informing them of the detected ransomware activity on their device. Include instructions on immediate next steps (e.g., disconnecting the device from the network, avoiding opening unknown files and links).\n\nTODO:\n- How can we identify the affected employee?",
+          "description": "Send an immediate notification to the affected employee informing them of the detected ransomware activity on their device. Include instructions on immediate next steps (e.g., disconnecting the device from the network, avoiding opening unknown files and links).",
           "display_name": "Notify Affected Employee",
-          "skip_execution": true
+          "skip_execution": false
         },
         "object_type": "definition_activity",
         "actions": [
           {
-            "unique_name": "definition_activity_025X016HES8H23ZktsrVPtxlcWTcTsEMb8e",
-            "name": "HTTP Request",
-            "title": "Lookup ServiceNow for Asset's Employee",
-            "type": "web-service.http_request",
+            "unique_name": "definition_activity_0263KHPGXS9MN7MLsplJtvAmjvCzMYc6cpE",
+            "name": "Match Regex",
+            "title": "Identify User",
+            "type": "core.matchregex",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Identify User",
+              "input_regex": "\\(([^)]+)\\)",
+              "input_string": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM",
+            "name": "Select from Table",
+            "title": "Identify Endpoint",
+            "type": "core.selectfromtable",
             "base_type": "activity",
             "properties": {
               "action_timeout": 180,
-              "allow_auto_redirect": true,
-              "allow_headers_redirect": false,
-              "continue_on_error_status_code": false,
+              "columns": [
+                {
+                  "column_name": "value",
+                  "column_type": "string"
+                }
+              ],
               "continue_on_failure": false,
-              "display_name": "Lookup ServiceNow for Asset's Employee",
-              "method": "GET",
-              "runtime_user": {
-                "target_default": true
+              "display_name": "Identify Endpoint",
+              "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi$",
+              "number_of_rows": {
+                "all_rows": true
               },
+              "persist_output": false,
               "skip_execution": false,
-              "target": {
-                "use_workflow_target": true
-              }
+              "sorting": {
+                "no_sort": true
+              },
+              "where_clause": "type = 'endpoint'"
             },
             "object_type": "definition_activity"
           },
@@ -81,12 +292,12 @@
             "type": "workflow.atomic_workflow",
             "base_type": "subworkflow",
             "properties": {
-              "continue_on_failure": false,
+              "continue_on_failure": true,
               "display_name": "Webex - Send Message to Affected User",
               "input": {
                 "variable_workflow_01PP77FMYQNAT1f0Boc3Jsu8zZuOJc7OaZs": "amasarda@cisco.com",
                 "variable_workflow_01PP77FMYQOKB6sht7fo6ocrtxThxDnzqIj": "",
-                "variable_workflow_01PP77FMYQPR36iRvL3LB8HijkENSJBlq5v": "## 🚨 IT has detected ransomware activity on one of your devices (Serial Number: PO987ABCD)\n\n\n### ACTION REQUIRED:\n\n1. Please disconnect the device from the network IMMEDIATELY.\n2. Do not open unknown files or links from sources you do not trust.\n3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.",
+                "variable_workflow_01PP77FMYQPR36iRvL3LB8HijkENSJBlq5v": "### 🚨 IT has detected ransomware activity on one of your devices $activity.definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM.output.output_table[0].value$ $activity.definition_activity_0263KHPGXS9MN7MLsplJtvAmjvCzMYc6cpE.output.matching_strings[0]$\n\n\n#### ACTION REQUIRED:\n\n1. Please disconnect the device from the network IMMEDIATELY.\n2. Do not open unknown files or links from sources you do not trust.\n3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.",
                 "variable_workflow_01PP77FMYQQX64KQBAlf3SoPQsmb3b6YMD4": "",
                 "variable_workflow_01PP77FMYQS346717GaMvyINtP5frU9HCPI": "$global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW.global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW$"
               },
@@ -113,7 +324,7 @@
         "type": "logic.group",
         "base_type": "activity",
         "properties": {
-          "continue_on_failure": false,
+          "continue_on_failure": true,
           "description": "Issue a notification to the IT and security teams about the incident, supplying vital information about the impacted device, such as its IP address, hostname, user, and indicators of compromise (IOC). This helps the teams prioritize their response and swiftly implement required remediation actions.\n\nTODO: Get a ServiceNow PDI",
           "display_name": "Engage IT \u0026 Security Teams",
           "skip_execution": false
@@ -132,10 +343,10 @@
               "display_name": "ServiceNow - Create Incident",
               "input": {
                 "variable_workflow_024A3C33QF9117NAAHiw4yjRyjfTSCyHOcY": 2,
-                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "Test Incident",
+                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "[Cisco XDR] Command \u0026 Control - $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
                 "variable_workflow_024A3C33QGBRY0vXwhIeQJ0C5cgCICwbAqq": "v2",
-                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "Test Description",
-                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "Test Work Note",
+                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa$\n\n",
+                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "This incident was created by Cisco XDR. Please click the following link to view the Incident in Cisco XDR: $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$",
                 "variable_workflow_024A3C33QH34L60r4F2r5mOO6j5DJ4qFR05": "admin",
                 "variable_workflow_024A3C33QH9KK77n9xqdyt4eQoSKpDp5S5B": 2,
                 "variable_workflow_024KB70LZWBXB79qp0VpTX0Hq1DbQx3xNzk": "IT Security",
@@ -160,29 +371,81 @@
       {
         "unique_name": "definition_activity_025WDGN648TZH3ua28lfhhf9uFALjMrMcX4",
         "name": "Group",
-        "title": "Enforce Protection Rules",
+        "title": "Investigate Domains",
         "type": "logic.group",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "description": "Leveraging Cisco Umbrella, update the list of blocked domains to ensure any associated domains used by the ransomware are stopped in further connection attempts. This step helps protect not only the affected employee's device but also the entire organization from the identified threat.",
-          "display_name": "Enforce Protection Rules",
-          "skip_execution": true
+          "description": "Leveraging Cisco Umbrella, pull the categories and risk score of the domains listed in the incident. This data can be used to make a decision if the host must be automatically isolated or not. This helps protect not only the affected employee's device but also the entire organization from the identified threat.",
+          "display_name": "Investigate Domains",
+          "skip_execution": false
         },
         "object_type": "definition_activity",
         "actions": [
           {
-            "unique_name": "definition_activity_025WEAEUVURLN4TWnC9k1i8TbjhyBCiG8Ro",
-            "name": "Umbrella - Investigate - Categorize Single Domain",
-            "title": "Umbrella - Investigate - Categorize Single Domain",
+            "unique_name": "definition_activity_0263T77NNHB5W2WZuoT9n8q4Uh0FiyPI6iI",
+            "name": "Select from Table",
+            "title": "Identify Domains from Observables",
+            "type": "core.selectfromtable",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "columns": [
+                {
+                  "column_name": "value",
+                  "column_type": "string"
+                }
+              ],
+              "continue_on_failure": false,
+              "display_name": "Identify Domains from Observables",
+              "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2MIWLY5J7LlvCgPEf2gSOwRZ6e7FaD$",
+              "number_of_rows": {
+                "all_rows": true
+              },
+              "persist_output": false,
+              "skip_execution": false,
+              "sorting": {
+                "no_sort": true
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_0263TLTDQ9U4S5ykvD5btq9E0R4x8dBUZlg",
+            "name": "Replace String",
+            "title": "Clean Up Domains",
+            "type": "core.replacestring",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Clean Up Domains",
+              "input_string": "$activity.definition_activity_0263T77NNHB5W2WZuoT9n8q4Uh0FiyPI6iI.output.response_body$",
+              "replace_list": [
+                {
+                  "replaced_string": "{\"value\":",
+                  "replacement_string": ""
+                },
+                {
+                  "replaced_string": "}",
+                  "replacement_string": ""
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_0262SND45DO4L4rBzV0LLNxfKXvuKzUN2bG",
+            "name": "Umbrella - Investigate - Categorize Multiple Domains",
+            "title": "Umbrella - Investigate - Categorize Multiple Domains",
             "type": "workflow.atomic_workflow",
             "base_type": "subworkflow",
             "properties": {
               "continue_on_failure": false,
-              "display_name": "Umbrella - Investigate - Categorize Single Domain",
+              "display_name": "Umbrella - Investigate - Categorize Multiple Domains",
               "input": {
-                "variable_workflow_01PP77ZWZ1OZK55Cu68cPECMLwqTQ7MSMHV": "monsteradds.at",
-                "variable_workflow_01PP77ZWZ1RLV4tHfFJvloeNEOVie2H55rk": ""
+                "variable_workflow_01PP77T94NCVK07AQKlD2toRmBIQWBnrN4W": "$activity.definition_activity_0263TLTDQ9U4S5ykvD5btq9E0R4x8dBUZlg.output.result_string$",
+                "variable_workflow_01PP77T94NHEM1lcdHctjekmfTbiTjRx1Z4": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262S5IABXL622v1jsxfHyZ6XLGBNt8v8Eu$"
               },
               "runtime_user": {
                 "target_default": true
@@ -193,23 +456,94 @@
                 "target_id": "definition_target_01OX88ZJWA63O6H2tIrCteSWiodpYie6wtA",
                 "target_type": "web-service.endpoint"
               },
-              "workflow_id": "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
-              "workflow_name": "Umbrella - Investigate - Categorize Single Domain"
+              "workflow_id": "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
+              "workflow_name": "Umbrella - Investigate - Categorize Multiple Domains"
             },
             "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_0262SWJ1PV39459VeNdRqzbUlqBYybUNKiH",
+            "name": "JSONPath Query",
+            "title": "Get list of security categories",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Get list of security categories",
+              "input_json": "$activity.definition_activity_0262SND45DO4L4rBzV0LLNxfKXvuKzUN2bG.output.variable_workflow_01PP77T94NIQA4cP67qDmAmpoANOsUNGxd3$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.*.security_categories[*]",
+                  "jsonpath_query_name": "list_of_security_categories",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_0262WC3WII5C10Eaq3emrnHdNxSK2kZt9ht",
+            "name": "For Each",
+            "title": "For Each Domain",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": true,
+              "display_name": "For Each Domain",
+              "skip_execution": false,
+              "source_array": "$activity.definition_activity_0263T77NNHB5W2WZuoT9n8q4Uh0FiyPI6iI.output.output_table$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_0262WB584GBN65M5RuOFHkDw6vMepysffK2",
+                "name": "HTTP Request",
+                "title": "Umbrella - Get Risk Score",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "allow_headers_redirect": false,
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "custom_headers": [
+                    {
+                      "name": "Authorization",
+                      "value": "Bearer $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262S5IABXL622v1jsxfHyZ6XLGBNt8v8Eu$"
+                    }
+                  ],
+                  "display_name": "Umbrella - Get Risk Score",
+                  "method": "GET",
+                  "relative_url": "domains/risk-score/$activity.definition_activity_0262WC3WII5C10Eaq3emrnHdNxSK2kZt9ht.input.source_array[@].value$",
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01OX88ZJWA63O6H2tIrCteSWiodpYie6wtA"
+                  }
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           }
         ]
       },
       {
         "unique_name": "definition_activity_025WZJC88QO2V08lCswc1cREjt6L3dGbhX8",
         "name": "Condition Block",
-        "title": "Is Category Malware?",
+        "title": "Is Category Command And Control AND Risk \u003e 90?",
         "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "display_name": "Is Category Malware?",
-          "skip_execution": true
+          "display_name": "Is Category Command And Control AND Risk \u003e 90?",
+          "skip_execution": false
         },
         "object_type": "definition_activity",
         "blocks": [
@@ -221,9 +555,9 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "",
-                "operator": "eq",
-                "right_operand": ""
+                "left_operand": "$activity.definition_activity_0262SWJ1PV39459VeNdRqzbUlqBYybUNKiH.output.jsonpath_queries.list_of_security_categories$",
+                "operator": "mregex",
+                "right_operand": "Command.and.Control"
               },
               "continue_on_failure": false,
               "display_name": "Yes",
@@ -231,6 +565,74 @@
             },
             "object_type": "definition_activity",
             "actions": [
+              {
+                "unique_name": "definition_activity_026076LXRNQ8J6ilG8raPsg4C9GH4q2RGKp",
+                "name": "Group",
+                "title": "LOOKUP HOST USING SECURE ENDPOINT",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "LOOKUP HOST USING SECURE ENDPOINT",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_02607RDIGD1XC41zaaKJgyPoH1iNja24PGi",
+                    "name": "Secure Endpoint - Get Connector GUID",
+                    "title": "Secure Endpoint - Get Connector GUID",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Secure Endpoint - Get Connector GUID",
+                      "input": {
+                        "variable_workflow_01PP77C52C1JW5Pqd1VUdTlo0WKZ2UQbpgw": "",
+                        "variable_workflow_01PP77C52C2RZ0GjYGmgf3zPv3tzU1zFjVM": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi[0].value$"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_0262UGAGPYBHQ6FUXVOXCGO9payLod0NVbY",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
+                      "workflow_name": "Secure Endpoint - Get Connector GUID"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_02607RSARG3HH0iaF5NWBEiGunlI9olg5aD",
+                    "name": "Secure Endpoint - Get Computer by GUID",
+                    "title": "Secure Endpoint - Get Computer by GUID",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Secure Endpoint - Get Computer by GUID",
+                      "input": {
+                        "variable_workflow_01PP74IOK1F8X1nh8wxcA1PbxvHFYsYvjdN": "$activity.definition_activity_02607RDIGD1XC41zaaKJgyPoH1iNja24PGi.output.variable_workflow_01PP77C52C41N2AUHsNvtJ2LcGWFNMvqukW$"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_0262UGAGPYBHQ6FUXVOXCGO9payLod0NVbY",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
+                      "workflow_name": "Secure Endpoint - Get Computer by GUID"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
               {
                 "unique_name": "definition_activity_025WDH96BBFHR7er4Np5ZPM76Vvjnkt3CVb",
                 "name": "Group",
@@ -252,46 +654,97 @@
                     "type": "workflow.atomic_workflow",
                     "base_type": "subworkflow",
                     "properties": {
+                      "continue_on_failure": false,
                       "display_name": "Secure Endpoint - Isolate Host",
                       "input": {
-                        "variable_workflow_01PP77UWF61XC6J78V5wbJCUMq6FbLtlWMn": ""
+                        "variable_workflow_01PP77UWF61XC6J78V5wbJCUMq6FbLtlWMn": "$activity.definition_activity_02607RDIGD1XC41zaaKJgyPoH1iNja24PGi.output.variable_workflow_01PP77C52C41N2AUHsNvtJ2LcGWFNMvqukW$"
                       },
                       "runtime_user": {
                         "target_default": true
                       },
+                      "skip_execution": false,
                       "target": {
-                        "target_type": "web-service.endpoint",
-                        "use_workflow_target": true
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_0262UGAGPYBHQ6FUXVOXCGO9payLod0NVbY",
+                        "target_type": "web-service.endpoint"
                       },
                       "workflow_id": "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
                       "workflow_name": "Secure Endpoint - Isolate Host"
                     },
                     "object_type": "definition_activity"
-                  },
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_025WDHBOIGIVZ3WSpoTNeAZnqr3M38u0ezz",
+                "name": "Group",
+                "title": "Document the Incident",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "description": "Record the details of the ransomware attack, the affected device, and the remediation actions taken. This documentation will be beneficial in refining your organization's security strategy and improving response metrics, like mean time to detection (MTTD) and mean time to response (MTTR).",
+                  "display_name": "Document the Incident",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
                   {
-                    "unique_name": "definition_activity_025X35SA44RUW5bhjsfmbcx9sGKtM6KjkCs",
-                    "name": "XDR - Contain Incident: Domains",
-                    "title": "XDR - Contain Incident: Domains",
-                    "type": "workflow.sub_workflow",
+                    "unique_name": "definition_activity_025WE8Z962A6S6jrYG3a2yegSlnEP15FCvI",
+                    "name": "XDR - Incidents - Create Note",
+                    "title": "XDR - Incidents - Create Note",
+                    "type": "workflow.atomic_workflow",
                     "base_type": "subworkflow",
                     "properties": {
-                      "display_name": "XDR - Contain Incident: Domains",
+                      "continue_on_failure": true,
+                      "display_name": "XDR - Incidents - Create Note",
                       "input": {
-                        "variable_workflow_024T4T98TMP4X17OoCe6tWsFFuZPA523ncP": "",
-                        "variable_workflow_024T4T98TMX0M2LPFo38lOfV07uXUa2Bbt8": "",
-                        "variable_workflow_024T4T98TNE8S2Lysz99zDfsAvsqm92HS4r": "",
-                        "variable_workflow_024T4T98TNLG34Y0l7No7uRuRdcfNTThFli": "",
-                        "variable_workflow_024T4T98TNU0K2DTwiSUA7HwKtQSOhUAdvq": ""
+                        "variable_workflow_024S5ENDMV7U40d5sa42VGtpZv9CTZMeTIX": "[{\n\"entity_type\": \"incident\",\n\"entity_id\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$\"\n},\n{\n\"entity_type\": \"coa\",\n\"entity_id\": \"\"\n}]",
+                        "variable_workflow_024S5ENDMVXZ31psugTUnbhgMZ3ZmRcH81t": "[{\n\"source_name\": \"auto:workflow:name\",\n\"description\": \"CLUS: Command \u0026 Control Response Workflow\"\n},\n{\n\"source_name\": \"auto:workflow:user_email\",\n\"description\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$\"\n},\n{\n\"source_name\": \"auto:workflow:url\",\n\"url\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.instance_id$\"\n}]",
+                        "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "task_workflow_completed",
+                        "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "### [RESPONSE TASK] [CLUS: Command \u0026 Control Response Workflow]\n\nSuccessfully isolated host: $activity.definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM.output.output_table[0].value$\n\nWorkflow started by $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$ at $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.start_time$ completed successfully.\n",
+                        "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
+                        "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": "Automation Workflow"
                       },
                       "runtime_user": {
                         "target_default": true
                       },
+                      "skip_execution": false,
                       "target": {
-                        "execute_on_this_target_group": true,
-                        "target_group_id": "target_group_01HLKTH50I3ZU5IfL3dwQos38eRFcE5gYjM"
+                        "override_workflow_target": true,
+                        "target_id": "$module_target;SecureX;securex:ao:iroh_api$",
+                        "target_type": "web-service.endpoint"
                       },
-                      "workflow_id": "definition_workflow_02496ZJNYJTVH5RB6ApAFfhBXeMsBwFD8LJ",
-                      "workflow_name": "XDR - Contain Incident: Domains"
+                      "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
+                      "workflow_name": "XDR - Incidents - Create Note"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_025X5OVCUGL2V4sGMW6ZsPmAEMdRkcSCD4X",
+                    "name": "ServiceNow - Add Work Note to Incident",
+                    "title": "ServiceNow - Add Work Note to Incident",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "ServiceNow - Add Work Note to Incident",
+                      "input": {
+                        "variable_workflow_024A3C46G4X133RRvukodYecgxT1UvboYjH": "From XDR Automate:\n\nSuccessfully isolated host: $activity.definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM.output.output_table[0].value$\n\nWorkflow started by $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$ at $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.start_time$ completed successfully.",
+                        "variable_workflow_024A3C46G57D94DlqwgX5vQdg4zsgdrE1nX": "v2",
+                        "variable_workflow_024A3C46G5EXB59uQiRFRVHrw5U1BS6pHMW": "$activity.definition_activity_025WE2XC8E9PZ4uJ1S8xTvfT1YXHLXbYvYN.output.variable_workflow_024A3C33QGW4I60zGPmom7jrFKaXgU8yunh$"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
+                      "workflow_name": "ServiceNow - Add Work Note to Incident"
                     },
                     "object_type": "definition_activity"
                   }
@@ -307,90 +760,92 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "",
-                "operator": "eq",
-                "right_operand": ""
+                "left_operand": "$activity.definition_activity_0262SWJ1PV39459VeNdRqzbUlqBYybUNKiH.output.jsonpath_queries.list_of_security_categories$",
+                "operator": "nmw",
+                "right_operand": "%Command%"
               },
               "continue_on_failure": false,
               "display_name": "No",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
-          }
-        ]
-      },
-      {
-        "unique_name": "definition_activity_025WDHBOIGIVZ3WSpoTNeAZnqr3M38u0ezz",
-        "name": "Group",
-        "title": "Document the Incident",
-        "type": "logic.group",
-        "base_type": "activity",
-        "properties": {
-          "continue_on_failure": false,
-          "description": "Record the details of the ransomware attack, the affected device, and the remediation actions taken. This documentation will be beneficial in refining your organization's security strategy and improving response metrics, like mean time to detection (MTTD) and mean time to response (MTTR).",
-          "display_name": "Document the Incident",
-          "skip_execution": true
-        },
-        "object_type": "definition_activity",
-        "actions": [
-          {
-            "unique_name": "definition_activity_025WE8Z962A6S6jrYG3a2yegSlnEP15FCvI",
-            "name": "XDR - Incidents - Create Note",
-            "title": "XDR - Incidents - Create Note",
-            "type": "workflow.atomic_workflow",
-            "base_type": "subworkflow",
-            "properties": {
-              "continue_on_failure": false,
-              "display_name": "XDR - Incidents - Create Note",
-              "input": {
-                "variable_workflow_024S5ENDMV7U40d5sa42VGtpZv9CTZMeTIX": "",
-                "variable_workflow_024S5ENDMVXZ31psugTUnbhgMZ3ZmRcH81t": "",
-                "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "",
-                "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "",
-                "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
-                "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": "XDR Automated Response"
-              },
-              "runtime_user": {
-                "target_default": true
-              },
-              "skip_execution": false,
-              "target": {
-                "override_workflow_target": true,
-                "target_id": "$module_target;SecureX;securex:ao:iroh_api$",
-                "target_type": "web-service.endpoint"
-              },
-              "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
-              "workflow_name": "XDR - Incidents - Create Note"
-            },
-            "object_type": "definition_activity"
-          },
-          {
-            "unique_name": "definition_activity_025X5OVCUGL2V4sGMW6ZsPmAEMdRkcSCD4X",
-            "name": "ServiceNow - Add Work Note to Incident",
-            "title": "ServiceNow - Add Work Note to Incident",
-            "type": "workflow.atomic_workflow",
-            "base_type": "subworkflow",
-            "properties": {
-              "continue_on_failure": false,
-              "display_name": "ServiceNow - Add Work Note to Incident",
-              "input": {
-                "variable_workflow_024A3C46G4X133RRvukodYecgxT1UvboYjH": "",
-                "variable_workflow_024A3C46G57D94DlqwgX5vQdg4zsgdrE1nX": "v2",
-                "variable_workflow_024A3C46G5EXB59uQiRFRVHrw5U1BS6pHMW": ""
-              },
-              "runtime_user": {
-                "target_default": true
-              },
-              "skip_execution": false,
-              "target": {
-                "override_workflow_target": true,
-                "target_id": "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk",
-                "target_type": "web-service.endpoint"
-              },
-              "workflow_id": "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
-              "workflow_name": "ServiceNow - Add Work Note to Incident"
-            },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_0263SKPFCX3P46X8srBpVuUR6uxHxj3l0VV",
+                "name": "Group",
+                "title": "Document the Incident",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "description": "Record the details of the ransomware attack, the affected device, and the remediation actions taken. This documentation will be beneficial in refining your organization's security strategy and improving response metrics, like mean time to detection (MTTD) and mean time to response (MTTR).",
+                  "display_name": "Document the Incident",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_0263SKPFCZMA24qHShZ3HE1w9Nc4pwMR80m",
+                    "name": "XDR - Incidents - Create Note",
+                    "title": "XDR - Incidents - Create Note",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": true,
+                      "display_name": "XDR - Incidents - Create Note",
+                      "input": {
+                        "variable_workflow_024S5ENDMV7U40d5sa42VGtpZv9CTZMeTIX": "[{\n\"entity_type\": \"incident\",\n\"entity_id\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$\"\n},\n{\n\"entity_type\": \"coa\",\n\"entity_id\": \"\"\n}]",
+                        "variable_workflow_024S5ENDMVXZ31psugTUnbhgMZ3ZmRcH81t": "[{\n\"source_name\": \"auto:workflow:name\",\n\"description\": \"CLUS: Command \u0026 Control Response Workflow\"\n},\n{\n\"source_name\": \"auto:workflow:user_email\",\n\"description\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$\"\n},\n{\n\"source_name\": \"auto:workflow:url\",\n\"url\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.instance_id$\"\n}]",
+                        "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "task_workflow_completed",
+                        "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "### [RESPONSE TASK] [CLUS: Command \u0026 Control Response Workflow]\n\nLow risk determined. Criteria to isolate host not met. Continue to monitor for subsequent incidents.\n\nWorkflow started by $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$ at $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.start_time$ completed successfully.",
+                        "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
+                        "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": "Automation Workflow"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "$module_target;SecureX;securex:ao:iroh_api$",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
+                      "workflow_name": "XDR - Incidents - Create Note"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_0263SKPFD31AT4wLE7gIEC6NgNvjM3y22T4",
+                    "name": "ServiceNow - Add Work Note to Incident",
+                    "title": "ServiceNow - Add Work Note to Incident",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "ServiceNow - Add Work Note to Incident",
+                      "input": {
+                        "variable_workflow_024A3C46G4X133RRvukodYecgxT1UvboYjH": "From XDR Automate:\n\nLow risk determined. Criteria to isolate host not met. Continue to monitor for subsequent incidents.\n\nWorkflow started by $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$ at $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.start_time$ completed successfully.",
+                        "variable_workflow_024A3C46G57D94DlqwgX5vQdg4zsgdrE1nX": "v2",
+                        "variable_workflow_024A3C46G5EXB59uQiRFRVHrw5U1BS6pHMW": "$activity.definition_activity_025WE2XC8E9PZ4uJ1S8xTvfT1YXHLXbYvYN.output.variable_workflow_024A3C33QGW4I60zGPmom7jrFKaXgU8yunh$"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_025X56JBFQSXO13FNFqghmLfqsWGd5lGjSk",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS",
+                      "workflow_name": "ServiceNow - Add Work Note to Incident"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -407,7 +862,7 @@
       "type": "basic.category",
       "base_type": "category",
       "description": "Workflows \u0026 Atomic Actions for BRKATO-1557: Automating Detection \u0026 Response Outcomes using Cisco XDR\n",
-      "category_type": "custom",
+      "category_type": "system",
       "object_type": "category"
     }
   },
@@ -444,7 +899,7 @@
     }
   },
   "events": {
-    "event_025WAE7QSESUZ5zvAuRKX1buugxOVbCaKwZ": {
+    "event_025ZJ6N263LQO5OPO5nBLWcBSj9veiaUSJU": {
       "name": "Command \u0026 Control Automation Rule",
       "title": "Command \u0026 Control Automation Rule",
       "description": "This Automation Rule triggers the Command and Control response workflow.",
@@ -467,7 +922,7 @@
         "rule_type": "rule_event",
         "title": "Command \u0026 Control Automation Rule"
       },
-      "unique_name": "event_025WAE7QSESUZ5zvAuRKX1buugxOVbCaKwZ"
+      "unique_name": "event_025ZJ6N263LQO5OPO5nBLWcBSj9veiaUSJU"
     }
   },
   "targets": {
@@ -523,6 +978,25 @@
         "path": "/api",
         "protocol": "https"
       }
+    },
+    "definition_target_0262UGAGPYBHQ6FUXVOXCGO9payLod0NVbY": {
+      "unique_name": "definition_target_0262UGAGPYBHQ6FUXVOXCGO9payLod0NVbY",
+      "name": "Secure Endpoint v1 KRK LAB",
+      "title": "Secure Endpoint v1 KRK LAB",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_0262UZK9FDUFC19lNDPnUA6mLuqQlJ11XHb",
+        "description": "",
+        "disable_certificate_validation": false,
+        "display_name": "Secure Endpoint v1 KRK LAB",
+        "host": "api.amp.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "path": "/v1",
+        "protocol": "https"
+      }
     }
   },
   "runtime_users": {
@@ -538,6 +1012,20 @@
         "basic_password": "*****",
         "basic_username": "admin",
         "display_name": "ServiceNow - CLUS PDI Admin"
+      }
+    },
+    "definition_runtime_user_0262UZK9FDUFC19lNDPnUA6mLuqQlJ11XHb": {
+      "unique_name": "definition_runtime_user_0262UZK9FDUFC19lNDPnUA6mLuqQlJ11XHb",
+      "name": "Secure_Endpoint_V1",
+      "title": "Secure_Endpoint_V1",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "Basic",
+        "basic_password": "*****",
+        "basic_username": "d4d4fb1e8a143e6f00e4",
+        "display_name": "Secure_Endpoint_V1"
       }
     }
   },
@@ -556,10 +1044,33 @@
       "object_type": "variable"
     }
   },
+  "table_types": {
+    "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG": {
+      "unique_name": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
+      "data_type": "datatype.tabletype",
+      "display_name": "XDR Incident Observables",
+      "columns": [
+        {
+          "name": "type",
+          "title": "type",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "title": "value",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  },
   "atomic_workflows": [
     "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
-    "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
+    "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
+    "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
+    "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
     "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
     "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
     "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
@@ -567,9 +1078,10 @@
   "dependent_workflows": [
     "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
-    "definition_workflow_01PP77ZX5WIF206cXjgKQ1HL4etBbWJd4Jl",
+    "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
+    "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
+    "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
     "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
-    "definition_workflow_02496ZJNYJTVH5RB6ApAFfhBXeMsBwFD8LJ",
     "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
     "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
   ],
@@ -580,10 +1092,10 @@
     }
   ],
   "wf_rule_trigger": {
-    "triggerevent_025WE2JHELZCS3j30rGAPIw4kPWXbYS3tem": {
+    "triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi": {
       "wf_unique_name": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR",
       "rule_unique_name": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I",
-      "trig_unique_name": "triggerevent_025WE2JHELZCS3j30rGAPIw4kPWXbYS3tem"
+      "trig_unique_name": "triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi"
     }
   }
 }
