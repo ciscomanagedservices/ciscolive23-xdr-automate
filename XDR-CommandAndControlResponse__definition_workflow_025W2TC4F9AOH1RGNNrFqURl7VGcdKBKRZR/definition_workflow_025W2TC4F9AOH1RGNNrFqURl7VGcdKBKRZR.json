@@ -7,49 +7,16 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.boolean",
         "properties": {
-          "value": "A device is involved in excessive malicious Command and Control communication, which is already flagged by Umbrella. The Command and Control traffic may be blocked, but the persisting infection is likely still there, which requires an active response in form of for example cleaning up or re-imaging the affected devices, changing user credentials, etc.",
-          "scope": "input",
-          "name": "incident_description",
-          "type": "datatype.string",
-          "description": "A device is involved in excessive malicious Command and Control communication, which is already flagged by Umbrella. The Command and Control traffic may be blocked, but the persisting infection is likely still there, which requires an active response in form of for example cleaning up or re-imaging the affected devices, changing user credentials, etc.",
+          "value": false,
+          "scope": "local",
+          "name": "is_risk_score_bad",
+          "type": "datatype.boolean",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
-        "properties": {
-          "value": [
-            {
-              "column_data": {
-                "type": "domain",
-                "value": "monsteradds.at"
-              }
-            },
-            {
-              "column_data": {
-                "type": "domain",
-                "value": "imestre.suzukiburgman.top"
-              }
-            },
-            {
-              "column_data": {
-                "type": "domain",
-                "value": "ssl.suzukiburgman.top"
-              }
-            }
-          ],
-          "scope": "input",
-          "name": "xdr_observables",
-          "type": "datatype.table",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_0264KVHXR2RDO7AzRKzpXydamazu9PFDyMt",
+        "unique_name": "variable_workflow_0264PEVWVDPVI2iOfF7CBgnBLeTaIWIRZhe",
         "object_type": "variable_workflow"
       },
       {
@@ -63,19 +30,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_0262S5IABXL622v1jsxfHyZ6XLGBNt8v8Eu",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "is_risk_score_bad",
-          "type": "datatype.boolean",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_0264PEVWVDPVI2iOfF7CBgnBLeTaIWIRZhe",
         "object_type": "variable_workflow"
       },
       {
@@ -124,6 +78,52 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
+        "properties": {
+          "value": [
+            {
+              "column_data": {
+                "type": "domain",
+                "value": "monsteradds.at"
+              }
+            },
+            {
+              "column_data": {
+                "type": "domain",
+                "value": "imestre.suzukiburgman.top"
+              }
+            },
+            {
+              "column_data": {
+                "type": "domain",
+                "value": "ssl.suzukiburgman.top"
+              }
+            }
+          ],
+          "scope": "input",
+          "name": "xdr_observables",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264KVHXR2RDO7AzRKzpXydamazu9PFDyMt",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "A device is involved in excessive malicious Command and Control communication, which is already flagged by Umbrella. The Command and Control traffic may be blocked, but the persisting infection is likely still there, which requires an active response in form of for example cleaning up or re-imaging the affected devices, changing user credentials, etc.",
+          "scope": "input",
+          "name": "incident_description",
+          "type": "datatype.string",
+          "description": "A device is involved in excessive malicious Command and Control communication, which is already flagged by Umbrella. The Command and Control traffic may be blocked, but the persisting infection is likely still there, which requires an active response in form of for example cleaning up or re-imaging the affected devices, changing user credentials, etc.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa",
         "object_type": "variable_workflow"
       }
     ],
@@ -339,7 +339,7 @@
               "continue_on_failure": false,
               "display_name": "Webex - Post Message to Room",
               "input": {
-                "variable_workflow_01PP78DJH1TI76BYfsu9g0Tqj2S6cUxjtu5": "26094b00-c61b-11e8-b256-d50e3c19c65d",
+                "variable_workflow_01PP78DJH1TI76BYfsu9g0Tqj2S6cUxjtu5": "148706c0-0157-11ee-adcf-21016de0a804",
                 "variable_workflow_01PP78DJH1XNQ7gNQ5iZdperRHqrppzARXC": "$global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW.global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW$",
                 "variable_workflow_01PP78DJH1YWL3allalGQbg1VkgKwh9GvCi": "### 🚨 IT has detected ransomware activity on one of your devices $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVO0SD3Y54Nulm0NP9REMZkqeECgAAn[0].value$ $activity.definition_activity_0263KHPGXS9MN7MLsplJtvAmjvCzMYc6cpE.output.matching_strings[0]$\n\n\n#### ACTION REQUIRED:\n\n1. Please disconnect the device from the network IMMEDIATELY.\n2. Do not open unknown files or links from sources you do not trust.\n3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.",
                 "variable_workflow_01PP78DJH22BB3Ej3I8tJ4OCQur0unYGjj9": "",
@@ -457,12 +457,12 @@
           {
             "unique_name": "definition_activity_0263TLTDQ9U4S5ykvD5btq9E0R4x8dBUZlg",
             "name": "Replace String",
-            "title": "Clean Up Domains",
+            "title": "Manipulate Response String",
             "type": "core.replacestring",
             "base_type": "activity",
             "properties": {
               "continue_on_failure": false,
-              "display_name": "Clean Up Domains",
+              "display_name": "Manipulate Response String",
               "input_string": "$activity.definition_activity_0263T77NNHB5W2WZuoT9n8q4Uh0FiyPI6iI.output.response_body$",
               "replace_list": [
                 {
@@ -520,7 +520,8 @@
                 {
                   "jsonpath_query": "$.*.security_categories[*]",
                   "jsonpath_query_name": "list_of_security_categories",
-                  "jsonpath_query_type": "string"
+                  "jsonpath_query_type": "string",
+                  "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
                 }
               ],
               "skip_execution": false
@@ -731,32 +732,6 @@
                       },
                       "workflow_id": "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
                       "workflow_name": "Secure Endpoint - Get Connector GUID"
-                    },
-                    "object_type": "definition_activity"
-                  },
-                  {
-                    "unique_name": "definition_activity_02607RSARG3HH0iaF5NWBEiGunlI9olg5aD",
-                    "name": "Secure Endpoint - Get Computer by GUID",
-                    "title": "Secure Endpoint - Get Computer by GUID",
-                    "type": "workflow.atomic_workflow",
-                    "base_type": "subworkflow",
-                    "properties": {
-                      "continue_on_failure": false,
-                      "display_name": "Secure Endpoint - Get Computer by GUID",
-                      "input": {
-                        "variable_workflow_01PP74IOK1F8X1nh8wxcA1PbxvHFYsYvjdN": "$activity.definition_activity_02607RDIGD1XC41zaaKJgyPoH1iNja24PGi.output.variable_workflow_01PP77C52C41N2AUHsNvtJ2LcGWFNMvqukW$"
-                      },
-                      "runtime_user": {
-                        "target_default": true
-                      },
-                      "skip_execution": false,
-                      "target": {
-                        "override_workflow_target": true,
-                        "target_id": "definition_target_0262UGAGPYBHQ6FUXVOXCGO9payLod0NVbY",
-                        "target_type": "web-service.endpoint"
-                      },
-                      "workflow_id": "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
-                      "workflow_name": "Secure Endpoint - Get Computer by GUID"
                     },
                     "object_type": "definition_activity"
                   }
@@ -1124,13 +1099,13 @@
       "display_name": "XDR Incident Observables",
       "columns": [
         {
-          "name": "value",
-          "title": "value",
+          "name": "type",
+          "title": "type",
           "type": "string"
         },
         {
-          "name": "type",
-          "title": "type",
+          "name": "value",
+          "title": "value",
           "type": "string"
         }
       ],
@@ -1143,7 +1118,6 @@
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
     "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
     "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
-    "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
     "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
     "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
   ],
@@ -1152,7 +1126,6 @@
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
     "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
     "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
-    "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
     "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
     "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
   ],
