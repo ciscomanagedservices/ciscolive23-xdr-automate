@@ -9,10 +9,11 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
-          "scope": "local",
+          "value": "A device is involved in excessive malicious Command and Control communication, which is already flagged by Umbrella. The Command and Control traffic may be blocked, but the persisting infection is likely still there, which requires an active response in form of for example cleaning up or re-imaging the affected devices, changing user credentials, etc.",
+          "scope": "input",
           "name": "incident_description",
           "type": "datatype.string",
+          "description": "A device is involved in excessive malicious Command and Control communication, which is already flagged by Umbrella. The Command and Control traffic may be blocked, but the persisting infection is likely still there, which requires an active response in form of for example cleaning up or re-imaging the affected devices, changing user credentials, etc.",
           "is_required": false,
           "is_invisible": false
         },
@@ -20,53 +21,35 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "incident_id",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
         "properties": {
-          "scope": "local",
+          "value": [
+            {
+              "column_data": {
+                "type": "domain",
+                "value": "monsteradds.at"
+              }
+            },
+            {
+              "column_data": {
+                "type": "domain",
+                "value": "imestre.suzukiburgman.top"
+              }
+            },
+            {
+              "column_data": {
+                "type": "domain",
+                "value": "ssl.suzukiburgman.top"
+              }
+            }
+          ],
+          "scope": "input",
           "name": "xdr_observables",
           "type": "datatype.table",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_0262R2MIWLY5J7LlvCgPEf2gSOwRZ6e7FaD",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
-        "properties": {
-          "scope": "local",
-          "name": "xdr_target_observables",
-          "type": "datatype.table",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "incident_short_description",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY",
+        "unique_name": "variable_workflow_0264KVHXR2RDO7AzRKzpXydamazu9PFDyMt",
         "object_type": "variable_workflow"
       },
       {
@@ -80,6 +63,67 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_0262S5IABXL622v1jsxfHyZ6XLGBNt8v8Eu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "is_risk_score_bad",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264PEVWVDPVI2iOfF7CBgnBLeTaIWIRZhe",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_026085BJKCC9D2xoJ15zUSqMEJ5fxNHsKLG",
+        "properties": {
+          "value": [
+            {
+              "column_data": {
+                "type": "endpoint",
+                "value": "commando.skynet.lab"
+              }
+            }
+          ],
+          "scope": "input",
+          "name": "xdr_target_observables",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264KVO0SD3Y54Nulm0NP9REMZkqeECgAAn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "https://private.intel.amp.cisco.com:443/ctia/incident/incident-5e7c8fab-29cc-415f-a9e2-06acebefca42",
+          "scope": "input",
+          "name": "incident_id",
+          "type": "datatype.string",
+          "description": "https://private.intel.amp.cisco.com:443/ctia/incident/incident-5e7c8fab-29cc-415f-a9e2-06acebefca42",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "DNS request for 'monsteradds.at', 'imestre.suzukiburgman.top', 'ssl.suzukiburgman.top' made by 'Matt Clemons (maclemon@skynet.lab)' (AD Users)",
+          "scope": "input",
+          "name": "incident_short_description",
+          "type": "datatype.string",
+          "description": "DNS request for 'monsteradds.at', 'imestre.suzukiburgman.top', 'ssl.suzukiburgman.top' made by 'Matt Clemons (maclemon@skynet.lab)' (AD Users)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY",
         "object_type": "variable_workflow"
       }
     ],
@@ -106,7 +150,7 @@
         "type": "logic.group",
         "base_type": "activity",
         "properties": {
-          "continue_on_failure": false,
+          "continue_on_failure": true,
           "display_name": "Parse Incident Context from Trigger",
           "skip_execution": false
         },
@@ -119,21 +163,21 @@
             "type": "core.set_multiple_variables",
             "base_type": "activity",
             "properties": {
-              "continue_on_failure": false,
+              "continue_on_failure": true,
               "display_name": "Set Incident ID, Description \u0026 Short Description",
               "skip_execution": false,
               "variables_to_update": [
                 {
-                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$",
-                  "variable_value_new": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.incident.id$"
+                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$",
+                  "variable_value_new": "$trigger.triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd.output.incident.id$"
                 },
                 {
-                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa$",
-                  "variable_value_new": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.incident.description$"
+                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa$",
+                  "variable_value_new": "$trigger.triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd.output.incident.description$"
                 },
                 {
-                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
-                  "variable_value_new": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.incident.short_description$"
+                  "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
+                  "variable_value_new": "$trigger.triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd.output.incident.short_description$"
                 }
               ]
             },
@@ -146,10 +190,10 @@
             "type": "logic.for_each",
             "base_type": "activity",
             "properties": {
-              "continue_on_failure": false,
+              "continue_on_failure": true,
               "display_name": "For Each Observable",
               "skip_execution": false,
-              "source_array": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.observables.data$"
+              "source_array": "$trigger.triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd.output.observables.data$"
             },
             "object_type": "definition_activity",
             "actions": [
@@ -163,7 +207,7 @@
                   "action_timeout": 180,
                   "continue_on_failure": false,
                   "display_name": "Add Observable To Table",
-                  "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2MIWLY5J7LlvCgPEf2gSOwRZ6e7FaD$",
+                  "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVHXR2RDO7AzRKzpXydamazu9PFDyMt$",
                   "row": [
                     {
                       "key": "value",
@@ -189,10 +233,10 @@
             "type": "logic.for_each",
             "base_type": "activity",
             "properties": {
-              "continue_on_failure": false,
+              "continue_on_failure": true,
               "display_name": "For Each Target Observable",
               "skip_execution": false,
-              "source_array": "$trigger.triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi.output.targets.data$"
+              "source_array": "$trigger.triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd.output.targets.data$"
             },
             "object_type": "definition_activity",
             "actions": [
@@ -206,17 +250,17 @@
                   "action_timeout": 180,
                   "continue_on_failure": false,
                   "display_name": "Add Target Observable To Table",
-                  "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi$",
+                  "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVO0SD3Y54Nulm0NP9REMZkqeECgAAn$",
                   "row": [
-                    {
-                      "key": "value",
-                      "type": "string",
-                      "value": "$activity.definition_activity_0262VJ6CNB9J46af3N67SwCm5ezzeJCmTE8.input.source_array[@].value$"
-                    },
                     {
                       "key": "type",
                       "type": "string",
                       "value": "$activity.definition_activity_0262VJ6CNB9J46af3N67SwCm5ezzeJCmTE8.input.source_array[@].type$"
+                    },
+                    {
+                      "key": "value",
+                      "type": "string",
+                      "value": "$activity.definition_activity_0262VJ6CNB9J46af3N67SwCm5ezzeJCmTE8.input.source_array[@].value$"
                     }
                   ],
                   "skip_execution": false
@@ -251,7 +295,7 @@
               "continue_on_failure": false,
               "display_name": "Identify User",
               "input_regex": "\\(([^)]+)\\)",
-              "input_string": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
+              "input_string": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
               "skip_execution": false
             },
             "object_type": "definition_activity"
@@ -272,7 +316,7 @@
               ],
               "continue_on_failure": false,
               "display_name": "Identify Endpoint",
-              "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi$",
+              "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVO0SD3Y54Nulm0NP9REMZkqeECgAAn$",
               "number_of_rows": {
                 "all_rows": true
               },
@@ -286,20 +330,20 @@
             "object_type": "definition_activity"
           },
           {
-            "unique_name": "definition_activity_025WDJVYO1LIE2UVNifbZazoQjGdoc8s8fU",
-            "name": "Webex - Send Message to Affected User",
-            "title": "Webex - Send Message to Affected User",
+            "unique_name": "definition_activity_0264PJU6AEQ7K2u4MbSBl2txXCmbs53N8e4",
+            "name": "Webex - Post Message to Room",
+            "title": "Webex - Post Message to Room",
             "type": "workflow.atomic_workflow",
             "base_type": "subworkflow",
             "properties": {
-              "continue_on_failure": true,
-              "display_name": "Webex - Send Message to Affected User",
+              "continue_on_failure": false,
+              "display_name": "Webex - Post Message to Room",
               "input": {
-                "variable_workflow_01PP77FMYQNAT1f0Boc3Jsu8zZuOJc7OaZs": "amasarda@cisco.com",
-                "variable_workflow_01PP77FMYQOKB6sht7fo6ocrtxThxDnzqIj": "",
-                "variable_workflow_01PP77FMYQPR36iRvL3LB8HijkENSJBlq5v": "### 🚨 IT has detected ransomware activity on one of your devices $activity.definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM.output.output_table[0].value$ $activity.definition_activity_0263KHPGXS9MN7MLsplJtvAmjvCzMYc6cpE.output.matching_strings[0]$\n\n\n#### ACTION REQUIRED:\n\n1. Please disconnect the device from the network IMMEDIATELY.\n2. Do not open unknown files or links from sources you do not trust.\n3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.",
-                "variable_workflow_01PP77FMYQQX64KQBAlf3SoPQsmb3b6YMD4": "",
-                "variable_workflow_01PP77FMYQS346717GaMvyINtP5frU9HCPI": "$global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW.global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW$"
+                "variable_workflow_01PP78DJH1TI76BYfsu9g0Tqj2S6cUxjtu5": "26094b00-c61b-11e8-b256-d50e3c19c65d",
+                "variable_workflow_01PP78DJH1XNQ7gNQ5iZdperRHqrppzARXC": "$global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW.global.variable_01NYRELNV6JYB1OgsCHds2YMeo1hgMEkoSW$",
+                "variable_workflow_01PP78DJH1YWL3allalGQbg1VkgKwh9GvCi": "### 🚨 IT has detected ransomware activity on one of your devices $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVO0SD3Y54Nulm0NP9REMZkqeECgAAn[0].value$ $activity.definition_activity_0263KHPGXS9MN7MLsplJtvAmjvCzMYc6cpE.output.matching_strings[0]$\n\n\n#### ACTION REQUIRED:\n\n1. Please disconnect the device from the network IMMEDIATELY.\n2. Do not open unknown files or links from sources you do not trust.\n3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.",
+                "variable_workflow_01PP78DJH22BB3Ej3I8tJ4OCQur0unYGjj9": "",
+                "variable_workflow_01SVERQNMKN8N6vqX2djMtAfshphGydGsH8": "[\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"body\": [\n{\n\"type\": \"Image\",\n\"url\": \"https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif\",\n\"size\": \"auto\",\n\"spacing\": \"Medium\",\n\"horizontalAlignment\": \"Center\"\n},\n{\n\"type\": \"ColumnSet\",\n\"columns\": [\n{\n\"type\": \"Column\",\n\"width\": 5,\n\"items\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"ACTION REQUIRED\",\n\"weight\": \"Bolder\",\n\"size\": \"Medium\",\n\"spacing\": \"None\",\n\"isSubtle\": true,\n\"color\": \"Attention\"\n},\n{\n\"type\": \"TextBlock\",\n\"text\": \"IT has detected ransomware activity on one of your devices $activity.definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM.output.output_table[0].value$ $activity.definition_activity_0263KHPGXS9MN7MLsplJtvAmjvCzMYc6cpE.output.matching_strings[0]$\",\n\"isSubtle\": false,\n\"spacing\": \"Medium\",\n\"wrap\": true,\n\"separator\": true,\n\"size\": \"Large\"\n},\n{\n\"type\": \"TextBlock\",\n\"text\": \"1. Please disconnect the device from the network IMMEDIATELY.\",\n\"size\": \"Medium\",\n\"wrap\": true,\n\"maxLines\": 5,\n\"isSubtle\": false,\n\"weight\": \"Default\",\n\"fontType\": \"Default\",\n\"spacing\": \"None\"\n},\n{\n\"type\": \"TextBlock\",\n\"text\": \"2. Do not open unknown files or links from sources you do not trust.\",\n\"size\": \"Medium\",\n\"wrap\": true,\n\"maxLines\": 5,\n\"isSubtle\": false,\n\"weight\": \"Default\",\n\"fontType\": \"Default\",\n\"spacing\": \"None\"\n},\n{\n\"type\": \"TextBlock\",\n\"text\": \"3. If you do not have access to this device, please call IT Helpdesk at 1800-HELP-ME.\",\n\"size\": \"Medium\",\n\"wrap\": true,\n\"maxLines\": 5,\n\"isSubtle\": false,\n\"weight\": \"Default\",\n\"fontType\": \"Default\",\n\"spacing\": \"None\"\n}\n]\n}\n]\n}\n],\n\"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n\"version\": \"1.3\"\n}\n}\n]"
               },
               "runtime_user": {
                 "target_default": true
@@ -307,11 +351,11 @@
               "skip_execution": false,
               "target": {
                 "override_workflow_target": true,
-                "target_id": "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5",
+                "target_id": "definition_target_01UU30WEVSZ2X6LXJRN8PHMkmY5xY358vd3",
                 "target_type": "web-service.endpoint"
               },
-              "workflow_id": "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
-              "workflow_name": "Webex - Send Message to User"
+              "workflow_id": "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw",
+              "workflow_name": "Webex - Post Message to Room"
             },
             "object_type": "definition_activity"
           }
@@ -343,10 +387,10 @@
               "display_name": "ServiceNow - Create Incident",
               "input": {
                 "variable_workflow_024A3C33QF9117NAAHiw4yjRyjfTSCyHOcY": 2,
-                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "[Cisco XDR] Command \u0026 Control - $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
+                "variable_workflow_024A3C33QG4KB6gXKjoPxmbE8TsSh1QiFbz": "[Cisco XDR] Command \u0026 Control - $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY$",
                 "variable_workflow_024A3C33QGBRY0vXwhIeQJ0C5cgCICwbAqq": "v2",
-                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa$\n\n",
-                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "This incident was created by Cisco XDR. Please click the following link to view the Incident in Cisco XDR: $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$",
+                "variable_workflow_024A3C33QGIYB1a8GxyhsUviqVPpoJjvMFl": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa$\n\n",
+                "variable_workflow_024A3C33QGPO52wbhivMSRd36712nX8rUeH": "This incident was created by Cisco XDR. Please click the following link to view the Incident in Cisco XDR: $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$",
                 "variable_workflow_024A3C33QH34L60r4F2r5mOO6j5DJ4qFR05": "admin",
                 "variable_workflow_024A3C33QH9KK77n9xqdyt4eQoSKpDp5S5B": 2,
                 "variable_workflow_024KB70LZWBXB79qp0VpTX0Hq1DbQx3xNzk": "IT Security",
@@ -398,7 +442,7 @@
               ],
               "continue_on_failure": false,
               "display_name": "Identify Domains from Observables",
-              "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2MIWLY5J7LlvCgPEf2gSOwRZ6e7FaD$",
+              "input_table": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVHXR2RDO7AzRKzpXydamazu9PFDyMt$",
               "number_of_rows": {
                 "all_rows": true
               },
@@ -529,6 +573,83 @@
                   }
                 },
                 "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_0264PF6ZH97J40NOWNkyjPDTrfyUfPvQ6zb",
+                "name": "JSONPath Query",
+                "title": "Parse Out Risk Score",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Parse Out Risk Score",
+                  "input_json": "$activity.definition_activity_0262WB584GBN65M5RuOFHkDw6vMepysffK2.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$.risk_score",
+                      "jsonpath_query_name": "risk_score",
+                      "jsonpath_query_type": "integer",
+                      "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_0264PF3TQDFZ13T3FqqCDDFrwSkJrE0J4FL",
+                "name": "Condition Block",
+                "title": "Risk Score Greater \u003e 90?",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Risk Score Greater \u003e 90?",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_0264PF3U1MMFT2X693AvNDi16QNHlvFtmPH",
+                    "name": "Condition Branch",
+                    "title": "Yes",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_0264PF6ZH97J40NOWNkyjPDTrfyUfPvQ6zb.output.jsonpath_queries.risk_score$",
+                        "operator": "gt",
+                        "right_operand": 90
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Yes",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_0264PFPHWYWUR0tCBdR80UuEPRpVAV9dVTm",
+                        "name": "Set Variables",
+                        "title": "Set is_risk_score_bad to True",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set is_risk_score_bad to True",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0264PEVWVDPVI2iOfF7CBgnBLeTaIWIRZhe$",
+                              "variable_value_new": true
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -555,9 +676,17 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_0262SWJ1PV39459VeNdRqzbUlqBYybUNKiH.output.jsonpath_queries.list_of_security_categories$",
-                "operator": "mregex",
-                "right_operand": "Command.and.Control"
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_0262SWJ1PV39459VeNdRqzbUlqBYybUNKiH.output.jsonpath_queries.list_of_security_categories$",
+                  "operator": "mregex",
+                  "right_operand": "Command.and.Control"
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0264PEVWVDPVI2iOfF7CBgnBLeTaIWIRZhe$",
+                  "operator": "eq",
+                  "right_operand": true
+                }
               },
               "continue_on_failure": false,
               "display_name": "Yes",
@@ -589,7 +718,7 @@
                       "display_name": "Secure Endpoint - Get Connector GUID",
                       "input": {
                         "variable_workflow_01PP77C52C1JW5Pqd1VUdTlo0WKZ2UQbpgw": "",
-                        "variable_workflow_01PP77C52C2RZ0GjYGmgf3zPv3tzU1zFjVM": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_0262R2GX0PKAB2KdvtNVazkqQ83bHrbY7zi[0].value$"
+                        "variable_workflow_01PP77C52C2RZ0GjYGmgf3zPv3tzU1zFjVM": "$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.input.variable_workflow_0264KVO0SD3Y54Nulm0NP9REMZkqeECgAAn[0].value$"
                       },
                       "runtime_user": {
                         "target_default": true
@@ -690,37 +819,6 @@
                 "object_type": "definition_activity",
                 "actions": [
                   {
-                    "unique_name": "definition_activity_025WE8Z962A6S6jrYG3a2yegSlnEP15FCvI",
-                    "name": "XDR - Incidents - Create Note",
-                    "title": "XDR - Incidents - Create Note",
-                    "type": "workflow.atomic_workflow",
-                    "base_type": "subworkflow",
-                    "properties": {
-                      "continue_on_failure": true,
-                      "display_name": "XDR - Incidents - Create Note",
-                      "input": {
-                        "variable_workflow_024S5ENDMV7U40d5sa42VGtpZv9CTZMeTIX": "[{\n\"entity_type\": \"incident\",\n\"entity_id\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$\"\n},\n{\n\"entity_type\": \"coa\",\n\"entity_id\": \"\"\n}]",
-                        "variable_workflow_024S5ENDMVXZ31psugTUnbhgMZ3ZmRcH81t": "[{\n\"source_name\": \"auto:workflow:name\",\n\"description\": \"CLUS: Command \u0026 Control Response Workflow\"\n},\n{\n\"source_name\": \"auto:workflow:user_email\",\n\"description\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$\"\n},\n{\n\"source_name\": \"auto:workflow:url\",\n\"url\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.instance_id$\"\n}]",
-                        "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "task_workflow_completed",
-                        "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "### [RESPONSE TASK] [CLUS: Command \u0026 Control Response Workflow]\n\nSuccessfully isolated host: $activity.definition_activity_0263K19CCMVS23XqjQCBrN5JDi58XdsSFhM.output.output_table[0].value$\n\nWorkflow started by $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$ at $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.start_time$ completed successfully.\n",
-                        "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
-                        "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": "Automation Workflow"
-                      },
-                      "runtime_user": {
-                        "target_default": true
-                      },
-                      "skip_execution": false,
-                      "target": {
-                        "override_workflow_target": true,
-                        "target_id": "$module_target;SecureX;securex:ao:iroh_api$",
-                        "target_type": "web-service.endpoint"
-                      },
-                      "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
-                      "workflow_name": "XDR - Incidents - Create Note"
-                    },
-                    "object_type": "definition_activity"
-                  },
-                  {
                     "unique_name": "definition_activity_025X5OVCUGL2V4sGMW6ZsPmAEMdRkcSCD4X",
                     "name": "ServiceNow - Add Work Note to Incident",
                     "title": "ServiceNow - Add Work Note to Incident",
@@ -785,37 +883,6 @@
                 "object_type": "definition_activity",
                 "actions": [
                   {
-                    "unique_name": "definition_activity_0263SKPFCZMA24qHShZ3HE1w9Nc4pwMR80m",
-                    "name": "XDR - Incidents - Create Note",
-                    "title": "XDR - Incidents - Create Note",
-                    "type": "workflow.atomic_workflow",
-                    "base_type": "subworkflow",
-                    "properties": {
-                      "continue_on_failure": true,
-                      "display_name": "XDR - Incidents - Create Note",
-                      "input": {
-                        "variable_workflow_024S5ENDMV7U40d5sa42VGtpZv9CTZMeTIX": "[{\n\"entity_type\": \"incident\",\n\"entity_id\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.local.variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH$\"\n},\n{\n\"entity_type\": \"coa\",\n\"entity_id\": \"\"\n}]",
-                        "variable_workflow_024S5ENDMVXZ31psugTUnbhgMZ3ZmRcH81t": "[{\n\"source_name\": \"auto:workflow:name\",\n\"description\": \"CLUS: Command \u0026 Control Response Workflow\"\n},\n{\n\"source_name\": \"auto:workflow:user_email\",\n\"description\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$\"\n},\n{\n\"source_name\": \"auto:workflow:url\",\n\"url\": \"$workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.instance_id$\"\n}]",
-                        "variable_workflow_024S5ENDMW51N6TOFwN7GJI8YS2dcIHkBFc": "task_workflow_completed",
-                        "variable_workflow_024S5ENDMWBJB5BFlu4J4nDGhkW3bb3aldL": "### [RESPONSE TASK] [CLUS: Command \u0026 Control Response Workflow]\n\nLow risk determined. Criteria to isolate host not met. Continue to monitor for subsequent incidents.\n\nWorkflow started by $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.started_by$ at $workflow.definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR.output.start_time$ completed successfully.",
-                        "variable_workflow_024S5ENDMWPGR42aXHi4UWgxGiAFJu49JaT": "",
-                        "variable_workflow_024S5GHPEMVDB7WZ7t3q51GjinVqEJhzWNS": "Automation Workflow"
-                      },
-                      "runtime_user": {
-                        "target_default": true
-                      },
-                      "skip_execution": false,
-                      "target": {
-                        "override_workflow_target": true,
-                        "target_id": "$module_target;SecureX;securex:ao:iroh_api$",
-                        "target_type": "web-service.endpoint"
-                      },
-                      "workflow_id": "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
-                      "workflow_name": "XDR - Incidents - Create Note"
-                    },
-                    "object_type": "definition_activity"
-                  },
-                  {
                     "unique_name": "definition_activity_0263SKPFD31AT4wLE7gIEC6NgNvjM3y22T4",
                     "name": "ServiceNow - Add Work Note to Incident",
                     "title": "ServiceNow - Add Work Note to Incident",
@@ -862,13 +929,13 @@
       "type": "basic.category",
       "base_type": "category",
       "description": "Workflows \u0026 Atomic Actions for BRKATO-1557: Automating Detection \u0026 Response Outcomes using Cisco XDR\n",
-      "category_type": "system",
+      "category_type": "custom",
       "object_type": "category"
     }
   },
   "rules": {
-    "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I": {
-      "name": "Test Automation Rule",
+    "ruleevent_0264M0BLZ1HUJ1hrL3lpLwFI8zUjacQPTGl": {
+      "name": "Command \u0026 Control Automation Rule",
       "title": "Command \u0026 Control Automation Rule",
       "description": "This Automation Rule triggers the Command and Control response workflow.",
       "type": "incident.rule_event",
@@ -890,23 +957,28 @@
         "workflows_config": [
           {
             "disabled": false,
-            "workflow_id": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR"
+            "workflow_id": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR",
+            "wf_input_variables": {
+              "variable_workflow_02608P1YZ9EML1Xjt82HXTfiEnZSvfFGoiH": "",
+              "variable_workflow_0262VKMSOCHNH1qMGgislLmeijzZuFELBqa": "",
+              "variable_workflow_0263LUSZ6G3Z47KXcYxmivbZIsaEUnxgnGY": ""
+            }
           }
         ]
       },
       "disabled": false,
-      "unique_name": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I"
+      "unique_name": "ruleevent_0264M0BLZ1HUJ1hrL3lpLwFI8zUjacQPTGl"
     }
   },
   "events": {
-    "event_025ZJ6N263LQO5OPO5nBLWcBSj9veiaUSJU": {
+    "event_0264M0BLXDQN90FWa7xyCzrxbHZKRdWoJ4B": {
       "name": "Command \u0026 Control Automation Rule",
       "title": "Command \u0026 Control Automation Rule",
       "description": "This Automation Rule triggers the Command and Control response workflow.",
       "type": "incident.event",
       "base_type": "event",
       "object_type": "event",
-      "rule_id": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I",
+      "rule_id": "ruleevent_0264M0BLZ1HUJ1hrL3lpLwFI8zUjacQPTGl",
       "target_id": "",
       "webhook_id": "",
       "version": "1.0.0",
@@ -922,7 +994,7 @@
         "rule_type": "rule_event",
         "title": "Command \u0026 Control Automation Rule"
       },
-      "unique_name": "event_025ZJ6N263LQO5OPO5nBLWcBSj9veiaUSJU"
+      "unique_name": "event_0264M0BLXDQN90FWa7xyCzrxbHZKRdWoJ4B"
     }
   },
   "targets": {
@@ -943,18 +1015,19 @@
         "protocol": "https"
       }
     },
-    "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5": {
-      "unique_name": "definition_target_01QJVFH72J8QB0eRSLer8fqmxTlpgDM4cj5",
-      "name": "Webex Teams",
-      "title": "Webex Teams",
+    "definition_target_01UU30WEVSZ2X6LXJRN8PHMkmY5xY358vd3": {
+      "unique_name": "definition_target_01UU30WEVSZ2X6LXJRN8PHMkmY5xY358vd3",
+      "name": "Webex_Target",
+      "title": "Webex_Target",
       "type": "web-service.endpoint",
       "base_type": "target",
       "object_type": "definition_target",
       "properties": {
-        "description": "Webex Teams",
+        "description": "Webex_Target",
         "disable_certificate_validation": false,
-        "display_name": "Webex Teams",
+        "display_name": "Webex_Target",
         "host": "webexapis.com",
+        "ignore_proxy": false,
         "no_runtime_user": true,
         "port": 443,
         "protocol": "https"
@@ -1051,13 +1124,13 @@
       "display_name": "XDR Incident Observables",
       "columns": [
         {
-          "name": "type",
-          "title": "type",
+          "name": "value",
+          "title": "value",
           "type": "string"
         },
         {
-          "name": "value",
-          "title": "value",
+          "name": "type",
+          "title": "type",
           "type": "string"
         }
       ],
@@ -1066,36 +1139,28 @@
     }
   },
   "atomic_workflows": [
-    "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
+    "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw",
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
     "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
     "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
     "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
     "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
-    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
     "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
   ],
   "dependent_workflows": [
-    "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
+    "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw",
     "definition_workflow_024A3C33BO5GB3LQuJjtf6LgaqMOgI6Br3k",
     "definition_workflow_01PP77T9C9XTR3P8cRkyYr4lXCL5znB5HbB",
     "definition_workflow_01PP77C57P1EP5HkNX8Xjvr4GtJceSq4xxX",
     "definition_workflow_01PP74IORHVRJ71OWWlueKVb5v2LMDNBZw1",
     "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
-    "definition_workflow_024S5ENDCK1LP5V2CLbAh3WWV20RHOHieks",
     "definition_workflow_024A3C469XQY41N0h9rZNqEnBbTMPFqbXaS"
   ],
-  "module_targets": [
-    {
-      "module_type": "SecureX",
-      "external_id": "securex:ao:iroh_api"
-    }
-  ],
   "wf_rule_trigger": {
-    "triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi": {
+    "triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd": {
       "wf_unique_name": "definition_workflow_025W2TC4F9AOH1RGNNrFqURl7VGcdKBKRZR",
-      "rule_unique_name": "ruleevent_025WAE7QVRITT7KK3Qsagxx5jNznt6PeS1I",
-      "trig_unique_name": "triggerevent_025ZJ6N2D4SU933lmF2j98IcD6p620ITHKi"
+      "rule_unique_name": "ruleevent_0264M0BLZ1HUJ1hrL3lpLwFI8zUjacQPTGl",
+      "trig_unique_name": "triggerevent_0264M0BM1NOCQ4l97vhfKg32w2w8Wu1q7Qd"
     }
   }
 }
