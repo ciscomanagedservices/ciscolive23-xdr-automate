@@ -1,6 +1,6 @@
 ## BRKATO-1557: Automating Detection & Response Outcomes using Cisco XDR <br><sub>.. and how CX Automation Services can help!</sub><div> <br> </div>
 
-[About Cisco Live](https://www.ciscolive.com/global.html) | [**Link to Session Presentation**]() | [**Link to Session Recording**]() 
+[About Cisco Live](https://www.ciscolive.com/global.html) | [**Link to Session Presentation**](https://github.com/ciscomanagedservices/ciscolive-xdr-automate/blob/main/BRKATO-1557%20-%20Automating%20Detection%20and%20Response%20Outcomes%20using%20Cisco%20XDR.pptx) | [**Link to Session Recording**]() 
 
 **Scenario:** Your organization has several remote employees who are using their personal devices to access sensitive company data. One of the employee's laptops gets infected with ransomware that attempts to establish command & control communication before initiating data encryption.
 
